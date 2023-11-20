@@ -1,6 +1,7 @@
 import useAuthContext from "./useAuthContext";
-import useAxiosInstance from "./useAxiosInstance";
+
 import { useQuery } from "@tanstack/react-query";
+import useAxiosInstance from "./useAxiosInstance";
 
 const useCart = () => {
   const axiosInstance = useAxiosInstance();

@@ -1,6 +1,7 @@
-import SectionTitle from "../../components/Shared/SectionTitle";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
-import useCart from "../../hooks/useCart";
+import SectionTitle from "../../../components/Shared/SectionTitle";
+import useAxiosInstance from "../../../hooks/useAxiosInstance";
+
+import useCart from "../../../hooks/useCart";
 import CartTable from "./CartTable";
 import Swal from "sweetalert2";
 

@@ -12,7 +12,7 @@ import Container from "../../../components/Shared/Container";
 const Banner = () => {
   return (
     <Container>
-      <Carousel className='' showStatus={false}>
+      <Carousel className='' showStatus={false} autoPlay={true}>
         <div>
           <img src={img1} />
         </div>

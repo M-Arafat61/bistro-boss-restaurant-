@@ -1,6 +1,5 @@
 import Container from "../../components/Shared/Container";
 import loginImg from "../../assets/others/authentication2.png";
-import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import {
   loadCaptchaEnginge,
@@ -11,6 +10,7 @@ import { useEffect, useState } from "react";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [captchaText, setCaptchaText] = useState("");
@@ -108,21 +108,8 @@ const Login = () => {
                 </div>
                 <p>Or sign in with</p>
               </div>
-
-              <div className='form-control mt-4 flex flex-row justify-center gap-6'>
-                <div className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl ' icon='ri:facebook-fill' />
-                </div>
-
-                <button className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl' icon='bi:google' />
-                </button>
-
-                <div className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl' icon='mingcute:github-fill' />
-                </div>
-              </div>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

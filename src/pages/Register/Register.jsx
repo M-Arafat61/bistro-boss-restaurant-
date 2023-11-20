@@ -1,10 +1,11 @@
-import { Icon } from "@iconify/react";
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../assets/others/authentication2.png";
 import Container from "../../components/Shared/Container";
 import { useForm } from "react-hook-form";
 import useAuthContext from "../../hooks/useAuthContext";
 import toast from "react-hot-toast";
+import { axiosPublic } from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Register = () => {
   const {
@@ -22,17 +23,26 @@ const Register = () => {
         console.log(res.user);
         updateUserProfile(data.name, data.photo)
           .then(() => {
-            console.log("profile updated");
-            reset();
-            navigate("/");
-            toast.success("Account created successfully!");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              createdAt: new Date(),
+            };
+            axiosPublic.post("/users", userInfo).then(res => {
+              if (res.data.insertedId) {
+                console.log("user updated to db");
+                reset();
+                navigate("/");
+                toast.success("Account created successfully!");
+              }
+            });
           })
           .catch(error => {
             console.error(error);
           });
       })
       .catch(error => {
-        console.log(error.message);
+        toast.error(`${error.message}`);
       });
     console.log(data);
   };
@@ -163,21 +173,9 @@ const Register = () => {
                 </div>
                 <p>Or sign up with</p>
               </div>
-              {/* social sign up */}
-              <div className='form-control mt-4 flex flex-row justify-center gap-6'>
-                <div className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl ' icon='ri:facebook-fill' />
-                </div>
-
-                <button className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl' icon='bi:google' />
-                </button>
-
-                <div className='border p-1 border-black rounded-full'>
-                  <Icon className='text-2xl' icon='mingcute:github-fill' />
-                </div>
-              </div>
             </form>
+            {/* social sign up */}
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
