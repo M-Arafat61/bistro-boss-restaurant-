@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/DashboardSidebar/Sidebar";
-import Container from "../components/Shared/Container";
 
 const Dashboard = () => {
   return (
-    <Container>
+    <div className='max-w-screen-xl mx-auto'>
       <div className='flex'>
-        <div className='w-72 min-h-screen bg-extended-gold space-y-10 pt-8'>
+        <div className='w-80 min-h-screen bg-extended-gold space-y-10 pt-8 '>
           <div className='flex flex-col items-center space-y-2'>
             <div className=' font-bold text-3xl'>Bistro Boss</div>
             <p className='uppercase tracking-widest text-lg font-semibold'>
@@ -19,7 +18,7 @@ const Dashboard = () => {
           <Outlet></Outlet>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

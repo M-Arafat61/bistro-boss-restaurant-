@@ -3,11 +3,14 @@ import Container from "../Container";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { Icon } from "@iconify/react";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logout } = useAuthContext();
 
-  const [cart] = useCart();
+  const [cart, ,] = useCart();
+
+  const [isAdmin] = useAdmin();
 
   const handleLogout = () => {
     logout()
@@ -49,14 +52,27 @@ const Navbar = () => {
         <li>Contact Us</li>
       </NavLink>
 
-      <Link to='/dashboard/cart'>
-        <button className='flex items-center'>
-          <Icon className='text-2xl mr-2' icon='mdi:cart' />
-          <div className='px-2 rounded-md  bg-extended-yellow'>
-            + {cart.length}
-          </div>
-        </button>
-      </Link>
+      {user && isAdmin && (
+        <Link to='/dashboard/adminHome'>
+          <li>Dashboard </li>
+        </Link>
+      )}
+      {user && !isAdmin && (
+        <Link to='/dashboard/userHome'>
+          <li>Dashboard</li>
+        </Link>
+      )}
+
+      {user && !isAdmin && (
+        <Link to='/dashboard/carts'>
+          <button className='flex items-center'>
+            <Icon className='text-2xl mr-2' icon='mdi:cart' />
+            <div className='px-2 rounded-md  bg-extended-yellow'>
+              + {cart.length}
+            </div>
+          </button>
+        </Link>
+      )}
       {user ? (
         <button onClick={handleLogout}>
           <li>Logout</li>

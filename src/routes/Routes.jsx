@@ -6,12 +6,18 @@ import OurShop from "../pages/OurShop/OurShop";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../layouts/Dashboard";
-import Cart from "../pages/Dashboard/Cart/Cart";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddItem from "../pages/Dashboard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
+import UpdateMenuItem from "../pages/Dashboard/ManageItems/UpdateMenuItem";
+import { axiosPublic } from "../hooks/useAxiosPublic";
+import MyCart from "../pages/Dashboard/Cart/MyCart";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 export const router = createBrowserRouter([
   {
@@ -49,10 +55,30 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "cart",
-        element: <Cart></Cart>,
+        path: "carts",
+        element: <MyCart></MyCart>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
       },
       // admin routes
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
       {
         path: "users",
         element: (
@@ -63,15 +89,25 @@ export const router = createBrowserRouter([
       },
       {
         path: "manageItems",
-        element: <ManageItems></ManageItems>,
-      },
-      {
-        path: "addItem",
         element: (
           <AdminRoute>
-            <AddItem></AddItem>
+            <ManageItems></ManageItems>
           </AdminRoute>
         ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateMenuItem></UpdateMenuItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) => axiosPublic.get(`/menu/${params.id}`),
+      },
+
+      {
+        path: "addItem",
+        element: <AddItem></AddItem>,
       },
     ],
   },

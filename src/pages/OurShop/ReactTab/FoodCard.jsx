@@ -38,14 +38,13 @@ const FoodCard = ({ foodItem }) => {
       axiosInstance
         .post("/carts", cartItem)
         .then(response => {
-          console.log(response.data);
           if (response.data.insertedId) {
             toast.success(`${name} added to your cart.`);
           }
           refetch();
         })
         .catch(error => {
-          console.log(error);
+          toast.error(`${error.message}`);
         });
     } else {
       Swal.fire({

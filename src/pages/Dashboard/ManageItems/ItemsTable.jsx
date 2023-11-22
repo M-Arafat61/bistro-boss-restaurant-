@@ -1,7 +1,8 @@
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
-const ItemsTable = ({ index, item, handleItemDelete, handleItemUpdate }) => {
-  const { name, image, price } = item;
+const ItemsTable = ({ index, item, handleItemDelete }) => {
+  const { name, image, price, _id } = item;
   return (
     <tr>
       <td>{index}.</td>
@@ -17,13 +18,17 @@ const ItemsTable = ({ index, item, handleItemDelete, handleItemUpdate }) => {
       </td>
       <td className='text-end'>${price}</td>
       <td>
-        <button
-          onClick={() => handleItemUpdate(item._id)}
-          className=' bg-extended-gold p-2 rounded-lg flex justify-center'
-          title='Update Menu'
-        >
-          <Icon className='text-white text-3xl' icon='basil:edit-solid'></Icon>
-        </button>
+        <Link to={`/dashboard/updateItem/${_id}`}>
+          <button
+            className=' bg-extended-gold p-2 rounded-lg flex justify-center'
+            title='Update Menu'
+          >
+            <Icon
+              className='text-white text-3xl'
+              icon='basil:edit-solid'
+            ></Icon>
+          </button>
+        </Link>
       </td>
 
       <td>

@@ -1,23 +1,29 @@
 import { Icon } from "@iconify/react";
 import { useForm } from "react-hook-form";
-import { axiosPublic } from "../../../hooks/useAxiosPublic";
-import useAxiosInstance from "../../../hooks/useAxiosInstance";
-import toast from "react-hot-toast";
+// import { axiosPublic } from "../../../hooks/useAxiosPublic";
 
-const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+import toast from "react-hot-toast";
+import { imageUpload } from "../../../hooks/imageUpload";
+import useAxiosInstance from "../../../hooks/useAxiosInstance";
+
+// const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const ItemForm = () => {
   const { register, handleSubmit, reset } = useForm();
+
   const axiosInstance = useAxiosInstance();
 
   const onSubmit = async data => {
-    const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    // const imageFile = { image: data.image[0] };
+    // const res = await axiosPublic.post(image_hosting_api, imageFile, {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // });
+    const image = data.image[0];
+    const res = await imageUpload(image);
+
     if (res.data.success) {
       const imageData = res?.data.data.url;
       const formData = {
@@ -27,9 +33,11 @@ const ItemForm = () => {
         category: data.category,
         price: parseFloat(data.price),
       };
-      const response = await axiosInstance.post("/menu", formData);
-      console.log(response.data);
-      if (response.data.insertedId) {
+      // const response = await axiosInstance.post("/menu", formData);
+      // console.log(response.data);
+      const itemRes = await axiosInstance.post("/menu", formData);
+
+      if (itemRes.data.insertedId) {
         reset();
         toast.success("Item added successfully");
       }
@@ -49,7 +57,7 @@ const ItemForm = () => {
               type='text'
               name='name'
               {...register("name", { required: true })}
-              placeholder='your name'
+              placeholder='Item name'
               className='input'
             />
           </div>

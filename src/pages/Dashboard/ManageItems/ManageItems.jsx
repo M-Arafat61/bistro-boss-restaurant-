@@ -2,17 +2,17 @@ import Swal from "sweetalert2";
 import SectionTitle from "../../../components/Shared/SectionTitle";
 import useMenuItems from "../../../hooks/useMenuItems";
 import ItemsTable from "./ItemsTable";
-import useAxiosInstance from "../../../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
+import useAxiosInstance from "../../../hooks/useAxiosInstance";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenuItems();
 
   const axiosInstance = useAxiosInstance();
 
-  const handleItemUpdate = id => {
-    console.log(id);
-  };
+  // const handleItemUpdate = id => {
+  //   console.log(id);
+  // };
   const handleItemDelete = id => {
     Swal.fire({
       title: "Are you sure?",
@@ -56,7 +56,6 @@ const ManageItems = () => {
               <ItemsTable
                 item={item}
                 index={index + 1}
-                handleItemUpdate={handleItemUpdate}
                 handleItemDelete={handleItemDelete}
               ></ItemsTable>
             </tbody>

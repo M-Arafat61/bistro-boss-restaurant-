@@ -5,7 +5,8 @@ import UserLists from "./UserLists";
 import useAdmin from "../../hooks/useAdmin";
 
 const Sidebar = () => {
-  const [isAdmin] = useAdmin();
+  const [isAdmin, ,] = useAdmin();
+
   return (
     <div className='space-y-8'>
       {/* Conditional lists  */}

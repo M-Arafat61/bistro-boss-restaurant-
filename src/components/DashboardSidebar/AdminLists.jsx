@@ -1,10 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-// import useCart from "../../hooks/useCart";
 
 const AdminLists = () => {
-  // const [cart] = useCart();
-
   return (
     <div>
       <ul className='pl-10 text-md font-medium gap-2 space-y-2 tracking-wider uppercase'>

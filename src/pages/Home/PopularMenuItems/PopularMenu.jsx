@@ -25,7 +25,7 @@ const PopularMenu = () => {
             item={popularMenu}
             buttonText={"View Full  Menu"}
             title={"popular"}
-          ></MenuCard>
+          />
         </div>
       </Container>
     </section>

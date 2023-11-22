@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../../../components/Shared/SectionTitle";
 import useAxiosInstance from "../../../hooks/useAxiosInstance";
 
@@ -5,7 +6,7 @@ import useCart from "../../../hooks/useCart";
 import CartTable from "./CartTable";
 import Swal from "sweetalert2";
 
-const Cart = () => {
+const MyCart = () => {
   const [cart, refetch] = useCart();
   const axiosInstance = useAxiosInstance();
 
@@ -51,9 +52,20 @@ const Cart = () => {
         <div className='flex items-center justify-evenly text-xl font-bold mb-5'>
           <h2>Total Order: {cart.length}</h2>
           <h2>Total Price: ${totalPrice}</h2>
-          <button className='px-5 py-1 overflow-hidden bg-extended-gold text-white rounded-lg'>
-            Pay
-          </button>
+          {cart.length ? (
+            <Link to='/dashboard/payment'>
+              <button className='px-5 py-1 overflow-hidden bg-extended-gold text-white rounded-lg'>
+                Pay
+              </button>
+            </Link>
+          ) : (
+            <button
+              disabled
+              className='px-5 py-1 overflow-hidden bg-extended-gold text-white rounded-lg'
+            >
+              Pay
+            </button>
+          )}
         </div>
         <table className='table '>
           <thead className='bg-extended-gold '>
@@ -81,4 +93,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default MyCart;

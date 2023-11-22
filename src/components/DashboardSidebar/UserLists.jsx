@@ -33,7 +33,7 @@ const UserLists = () => {
         <li className='flex items-center gap-2'>
           <Icon className='text-2xl' icon='streamline:payment-10-solid' />
           <NavLink
-            to='/dashboard/payment'
+            to='/dashboard/paymentHistory'
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "underline font-bold" : ""
             }
@@ -45,7 +45,7 @@ const UserLists = () => {
         <li className='flex items-center gap-2'>
           <Icon className='text-2xl' icon='mdi:cart' />
           <NavLink
-            to='/dashboard/cart'
+            to='/dashboard/carts'
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "underline font-bold" : ""
             }
